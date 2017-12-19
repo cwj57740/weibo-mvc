@@ -2,12 +2,12 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>登录</title>
 	<meta charset="UTF-8"/>
-    <script src="/ManagerSSM/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
         /* 登录按钮操作 */
         function login(){

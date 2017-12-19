@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>主页</title>
 	<meta charset="UTF-8">
-	<script src="/ManagerSSM/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 	<script type="text/javascript"></script>
 </head>
 <body>
@@ -50,7 +49,7 @@
 				上一页
 			</c:when>
 			<c:otherwise>
-				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
+				<a tabindex="0" href=‘"javascript:"+method+"(1)"’ page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
 				<a tabindex="0" href="javascript:void(0);" page="${friendpagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
 			</c:otherwise>
 		</c:choose>
@@ -126,7 +125,7 @@
 				上一页
 			</c:when>
 			<c:otherwise>
-				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
+				<a tabindex="0" href=‘"javascript:"+method+"(1)"’ page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
 				<a tabindex="0" href="javascript:void(0);" page="${weibopagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
 			</c:otherwise>
 		</c:choose>
