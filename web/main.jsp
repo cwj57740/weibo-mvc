@@ -49,7 +49,7 @@
 				上一页
 			</c:when>
 			<c:otherwise>
-				<a tabindex="0" href=‘"javascript:"+method+"(1)"’ page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
+				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
 				<a tabindex="0" href="javascript:void(0);" page="${friendpagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
 			</c:otherwise>
 		</c:choose>
@@ -125,7 +125,7 @@
 				上一页
 			</c:when>
 			<c:otherwise>
-				<a tabindex="0" href=‘"javascript:"+method+"(1)"’ page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
+				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
 				<a tabindex="0" href="javascript:void(0);" page="${weibopagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
 			</c:otherwise>
 		</c:choose>
