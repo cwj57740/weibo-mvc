@@ -7,13 +7,13 @@ import java.util.List;
 public class CommentDao {
     private Dao<Comment> dao = new Dao<>(Comment.class);
 
-    private int addComment(Comment comment){
+    public int addComment(Comment comment){
         String sql = "insert into comment (bid, uid, content) values (?, ?, ?)";
         return dao.addT(sql,comment.getBid(),comment.getUid(),comment.getContent());
     }
 
-//    private List<Comment> getCommentList(int bid){
-//        String sql = "select *"
-//    }
-
+    public List<Comment> getCommentListByBid(int bid,int index,int num){
+        String sql = "select * from comment where bid = ? limit ?, ?";
+        return dao.getTListByParams(sql,bid,index,num);
+    }
 }

@@ -1,7 +1,9 @@
 package cn.edu.hit.weibo.service;
 
 import cn.edu.hit.weibo.dao.BlogDao;
+import cn.edu.hit.weibo.dao.CommentDao;
 import cn.edu.hit.weibo.model.Blog;
+import cn.edu.hit.weibo.model.Comment;
 import cn.edu.hit.weibo.model.User;
 import cn.edu.hit.weibo.redis.BlogRedis;
 
@@ -34,6 +36,7 @@ public class WeiboService extends Observable {
     }
     private Blog blog;
     private BlogDao blogDao = new BlogDao();
+    private CommentDao commentDao = new CommentDao();
     private BlogRedis blogRedis = new BlogRedis();
 
     public Blog getBlog() {
@@ -108,6 +111,11 @@ public class WeiboService extends Observable {
 
     public List<Blog> getUserBlogList(User user, int index, int num){
         return blogDao.getBlogListByUser(user,index,num);
+    }
+
+    public void addComment(Comment comment){
+        int id = commentDao.addComment(comment);
+        comment.setId(id);
     }
 
 }
