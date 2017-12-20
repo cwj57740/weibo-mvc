@@ -49,5 +49,9 @@ public class BlogDao {
         String sql = "select * from blog where isDeleted = 0 and uid = ? order by datetime desc limit ?, ?";
         return dao.getTListByParams(sql,user.getUid(),index,num);
     }
+    public int getAllBlogCount(){
+        String sql = "select count(*) from blog";
+        return Integer.parseInt(dao.getColumnByParams(sql,"count(*)").toString());
+    }
 
 }

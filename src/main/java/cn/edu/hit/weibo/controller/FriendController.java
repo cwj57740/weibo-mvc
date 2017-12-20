@@ -3,6 +3,7 @@ package cn.edu.hit.weibo.controller;
 import cn.edu.hit.weibo.model.Friend;
 import cn.edu.hit.weibo.service.FriendService;
 import cn.edu.hit.weibo.service.UserService;
+import cn.edu.hit.weibo.util.ModelUtil;
 import cn.edu.hit.weibo.util.PageUtil;
 import com.google.gson.Gson;
 
@@ -28,20 +29,11 @@ public class FriendController {
         int length = PageUtil.EVERY_PAGE_ITEMS;
         Map<String,String> friendmap = friendService.getFriendList(uid,friendpagenum,length);
 
-        Map<String,Object> resultMap = new LinkedHashMap<>();
-        resultMap.put("friendlist",friendmap);
-        resultMap.put("total",total);
-        resultMap.put("maxpage",maxpage);
-        Gson gson = new Gson();
-        String json = gson.toJson(resultMap);
-
-        PrintWriter out = null;
         try {
-            out = response.getWriter();
+            ModelUtil.sendJsonResponse(response,friendmap,total,maxpage);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        out.write(json);
     }
 
     public static void addFriend(HttpServletRequest request, HttpServletResponse response){

@@ -13,20 +13,21 @@ public class RegisterController {
         PrintWriter out = null;
         try {
             out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            System.out.println("用户名："+username);
+            System.out.println("密码："+password);
+            boolean flag = us.register(username,password);
+            if(flag){
+                System.out.println("成功注册");
+                out.write("true");
+            }else {
+                out.write("false");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        response.setContentType("text/html;charset=UTF-8");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        System.out.println("用户名："+username);
-        System.out.println("密码："+password);
-        boolean flag = us.register(username,password);
-        if(flag){
-            System.out.println("成功注册");
-            out.write("true");
-        }else {
-            out.write("false");
-        }
+
     }
 }
