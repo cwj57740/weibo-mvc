@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-//@WebServlet("*.do")
+@WebServlet("*.do")
 public class MainServlet extends HttpServlet {
     private XMLParser xmlParser;
     public MainServlet() {
@@ -32,7 +32,7 @@ public class MainServlet extends HttpServlet {
         System.out.println(path);
         Method method = xmlParser.getMethod(path);
         try {
-            method.invoke(null,req,resp);
+            method.invoke(method.getDeclaringClass().newInstance(),req,resp);
         } catch (Exception e){
             e.printStackTrace();
         }

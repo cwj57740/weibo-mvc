@@ -5,4 +5,16 @@
         <class>cn.edu.hit.weibo.controller.TestController</class>
         <method>execute</method>
     </api>
+    <api path = "Register.do">
+        <class>cn.edu.hit.weibo.controller.RegisterController</class>
+        <method>register</method>
+    </api>
+    <api path = "Login.do">
+        <class>LoginController</class>
+        <method>login</method>
+    </api>
+    <api path = "GetFriendList.do">
+        <class>cn.edu.hit.weibo.controller.FriendController</class>
+        <method>showFriendList</method>
+    </api>
 </apis>
