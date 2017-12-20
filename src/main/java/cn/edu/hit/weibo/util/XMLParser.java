@@ -5,14 +5,16 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.List;
 
 /**
  * The type Xml paser.
  */
-public class XMLPaser {
-    private static String configPath = "api-config.xml";
+public class XMLParser {
+    private static String configPath = XMLParser.class.getClassLoader().getResource("api-config.xml").getPath();
     private static Document document;
     private static Element rootElement;
 
@@ -39,7 +41,7 @@ public class XMLPaser {
                 String className = element.elementTextTrim("class");
                 String methodName = element.elementTextTrim("method");
                 Class<?> clazz = Class.forName(className);
-                return clazz.getMethod(methodName);
+                return clazz.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
             }
         }catch (Exception e){
             e.printStackTrace();

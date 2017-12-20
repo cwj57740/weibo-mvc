@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <apis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="apis.xsd">
-    <api path = "">
-        <class></class>
-        <method></method>
+    <api path = "test">
+        <class>cn.edu.hit.weibo.controller.TestController</class>
+        <method>execute</method>
     </api>
 </apis>
