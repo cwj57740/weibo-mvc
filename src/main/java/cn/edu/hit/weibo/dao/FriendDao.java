@@ -8,9 +8,9 @@ import java.util.List;
 public class FriendDao {
     private Dao<Friend> dao = new Dao<>(Friend.class);
 
-    public boolean addFriend(Friend friend){
+    public int addFriend(Friend friend){
         String sql = "insert into Friend (uid, friendid) values (?, ?)";
-        return dao.updateT(sql,friend.getUid(),friend.getFriendid());
+        return dao.addT(sql,friend.getUid(),friend.getFriendid());
     }
 
     public List<Friend> getFriendList(int uid,int start,int length){
