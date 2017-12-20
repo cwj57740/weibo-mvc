@@ -19,6 +19,7 @@ public class LoginController {
             response.setContentType("text/html;charset=UTF-8");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            int uid = us.getUidByUsername(username);
             //测试用
 //		System.out.println("用户名："+username);
 //		System.out.println("密码："+password);
@@ -32,6 +33,7 @@ public class LoginController {
                 response.addCookie(cookie);
                 HttpSession session = request.getSession();
                 session.setAttribute("username",username);
+                session.setAttribute("uid",uid);
                 out.write("true");
                 out.close();
             }else {

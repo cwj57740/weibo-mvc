@@ -10,6 +10,7 @@
 
 	<!-- 获取用户名 -->
 	<% String username = (String)session.getAttribute("username");%>
+	<% int uid = (int)session.getAttribute("uid");%>
 
 	<script type="text/javascript"></script>
 </head>

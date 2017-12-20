@@ -36,12 +36,23 @@ public class FriendController {
         }
     }
 
-    public static void addFriend(HttpServletRequest request, HttpServletResponse response){
-        int friendid = Integer.parseInt(request.getParameter("uid"));
-        String username = request.getParameter("username");
-        int uid = userService.getUidByUsername(username);
-        friend.setUid(uid);
-        friend.setFriendid(friendid);
-        boolean flag = friendService.addFriend(friend);
+    public static void addFriend(HttpServletRequest request, HttpServletResponse response) {
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            int friendid = Integer.parseInt(request.getParameter("uid"));
+            String username = request.getParameter("username");
+            int uid = userService.getUidByUsername(username);
+            friend.setUid(uid);
+            friend.setFriendid(friendid);
+            boolean flag = friendService.addFriend(friend);
+            if (flag) {
+                out.write("true");
+            } else {
+                out.write("false");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
