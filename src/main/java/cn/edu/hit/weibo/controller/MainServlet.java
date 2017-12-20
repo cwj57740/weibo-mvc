@@ -32,7 +32,7 @@ public class MainServlet extends HttpServlet {
         System.out.println(path);
         Method method = xmlParser.getMethod(path);
         try {
-            method.invoke(method.getDeclaringClass().newInstance(),req,resp);
+            method.invoke(null,req,resp);
         } catch (Exception e){
             e.printStackTrace();
         }

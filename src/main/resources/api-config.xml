@@ -5,16 +5,41 @@
         <class>cn.edu.hit.weibo.controller.TestController</class>
         <method>execute</method>
     </api>
-    <api path = "Register.do">
+    <api path = "Register">
         <class>cn.edu.hit.weibo.controller.RegisterController</class>
         <method>register</method>
     </api>
-    <api path = "Login.do">
+    <api path = "Login">
         <class>LoginController</class>
         <method>login</method>
     </api>
-    <api path = "GetFriendList.do">
+    <api path = "AddFriend">
+        <class>cn.edu.hit.weibo.controller.FriendController</class>
+        <method>addFriend</method>
+    </api>
+    <api path = "GetFriendList">
         <class>cn.edu.hit.weibo.controller.FriendController</class>
         <method>showFriendList</method>
+    </api>
+
+    <api path = "AddWeibo">
+        <class>cn.edu.hit.weibo.controller.WeiboController</class>
+        <method>addWeibo</method>
+    </api>
+    <api path = "GetWeiboList">
+        <class>cn.edu.hit.weibo.controller.WeiboController</class>
+        <method>getWeiboList</method>
+    </api>
+    <api path = "GetOwnWeiboList">
+        <class>cn.edu.hit.weibo.controller.WeiboController</class>
+        <method>getOwnWeiboList</method>
+    </api>
+    <api path = "AddComment">
+        <class>cn.edu.hit.weibo.controller.WeiboController</class>
+        <method>addComment</method>
+    </api>
+    <api path = "GetCommentList">
+        <class>cn.edu.hit.weibo.controller.WeiboController</class>
+        <method>getCommentList</method>
     </api>
 </apis>

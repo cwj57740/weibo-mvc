@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class LoginController {
-    private UserService us = new UserService();
-    public void login(HttpServletRequest request, HttpServletResponse response){
+    private static UserService us = new UserService();
+    public static void login(HttpServletRequest request, HttpServletResponse response){
         PrintWriter out = null;
         try {
             out = response.getWriter();

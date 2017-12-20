@@ -46,7 +46,7 @@ public class WeiboController {
         ResponseUtil.sendBooleanResponse(response,b);
     }
 
-    public static void getOwnWeibo(HttpServletRequest request, HttpServletResponse response){
+    public static void getOwnWeiboList(HttpServletRequest request, HttpServletResponse response){
         int pagenum = Integer.parseInt(request.getParameter("pagenum"));
 
         int uid = (int) request.getSession().getAttribute("uid");
