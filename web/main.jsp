@@ -389,13 +389,10 @@
     }
 
     $(document).ready(function() {
-        // friend_page_jump(2);
-        // clear_other_weibo_table();
-        // insert_other_weibo_table("1212", "22", "linx", "sd", 55);
-        // clear_self_weibo_list()
-        // insert_self_weibo_table("sd", "title", "sd2222");
-        // clear_comment_table();
-        // insert_comment_table("sdsdsd", "121212121");
+        comment_page_jump(2);
+        friend_page_jump(2);
+        other_weibo_page_jump(2);
+        self_weibo_page_jump(2);
     });
 </script>
 </body>
