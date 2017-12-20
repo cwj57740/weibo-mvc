@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-@WebServlet("*.do")
+//@WebServlet("*.do")
 public class MainServlet extends HttpServlet {
     private XMLParser xmlParser;
     public MainServlet() {

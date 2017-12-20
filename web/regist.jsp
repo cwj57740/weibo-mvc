@@ -15,18 +15,15 @@
 
             $.ajax({
                 type:"POST",
-                url:"/blog/Regist.do",
+                url:"/Regist.do",
                 data:{"username":username,"password":password},
                 dataType:"json",
                 success:function (data){
                     if(data){
                         alert("注册成功！");
                     }else{
-                        alert("用户名或密码有误！");
+                        alert("用户名已存在！");
                     }
-                },
-                error:function(){
-                    alert("有错误");
                 }
             });
         }

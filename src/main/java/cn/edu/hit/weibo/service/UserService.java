@@ -25,4 +25,10 @@ public class UserService {
         }
         return false;
     }
+
+    public int getUidByUsername(String username){
+        User user = userDao.getUserByUsername(username);
+        int uid = user.getUid();
+        return uid;
+    }
 }

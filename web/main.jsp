@@ -7,6 +7,10 @@
 	<title>主页</title>
 	<meta charset="UTF-8">
 	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+
+	<!-- 获取用户名 -->
+	<% String username = (String)session.getAttribute("username");%>
+
 	<script type="text/javascript"></script>
 </head>
 <body>
@@ -29,7 +33,7 @@
 	<tbody>
        <c:forEach var="" items="">
 		<tr>
-			<td id="bid"></td>
+			<td></td>
 			<td></td>
 			<td>
                 <button class="btn btn-info" onclick="">
