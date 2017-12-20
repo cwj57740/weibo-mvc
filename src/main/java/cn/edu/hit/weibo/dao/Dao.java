@@ -1,12 +1,12 @@
 package cn.edu.hit.weibo.dao;
 
 import cn.edu.hit.weibo.util.JdbcUtils;
+import org.apache.commons.dbutils.ColumnHandler;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.handlers.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The type Dao.
@@ -99,6 +99,16 @@ public class Dao<T> {
         }
     }
 
+    public Object getColumnByParams(String sql,String columnName, Object ... params){
+        QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+        try {
+            Map<String, Object> query = qr.query(sql, new MapHandler());
+            return query.get(columnName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     private Class<T> getClazz(){
         return entityClass;
@@ -111,5 +121,7 @@ public class Dao<T> {
      * @param clazz clazz The class to introspect
      * @param index the Index of the generic ddeclaration,start from 0.
      */
+
+
 
 }

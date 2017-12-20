@@ -14,7 +14,12 @@ public class FriendDao {
     }
 
     public List<Friend> getFriendList(int uid,int start,int length){
-        String sql = "select * from Friend where uid = ? order by id ASC limit (?, ?)";
+        String sql = "select * from Friend where uid = ? order by id ASC limit ?, ?";
         return dao.getTListByParams(sql,uid,start,length);
+    }
+
+    public int getFriendListCount(int uid){
+        String sql = "select count(friendid) from friend where uid = ?";
+        return Integer.parseInt(dao.getColumnByParams(sql,"count(friendid)",uid).toString());
     }
 }

@@ -22,4 +22,9 @@ public class FriendService {
         }
         return map;
     }
+
+    public int getFriendListCount(int uid){
+        int total = friendDao.getFriendListCount(uid);
+        return total;
+    }
 }

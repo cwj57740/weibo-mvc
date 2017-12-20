@@ -105,12 +105,12 @@ public class WeiboService extends Observable {
         return false;
     }
 
-    public List<Blog> getAllBlogList(int index, int num){
-        return blogDao.getBlogList(index,num);
+    public List<Blog> getAllBlogList(int start, int length){
+        return blogDao.getBlogList(start,length);
     }
 
-    public List<Blog> getUserBlogList(User user, int index, int num){
-        return blogDao.getBlogListByUser(user,index,num);
+    public List<Blog> getUserBlogList(User user, int start, int length){
+        return blogDao.getBlogListByUser(user,start,length);
     }
 
     public void addComment(Comment comment){
