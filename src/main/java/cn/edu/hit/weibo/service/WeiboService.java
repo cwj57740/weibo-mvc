@@ -109,6 +109,10 @@ public class WeiboService extends Observable {
         return blogDao.getBlogList(start,length);
     }
 
+    public int getAllBlogCount(){
+        return blogDao.getAllBlogCount();
+    }
+
     public List<Blog> getUserBlogList(User user, int start, int length){
         return blogDao.getBlogListByUser(user,start,length);
     }

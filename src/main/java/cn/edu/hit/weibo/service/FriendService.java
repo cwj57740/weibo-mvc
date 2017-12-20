@@ -24,7 +24,6 @@ public class FriendService {
     }
 
     public int getFriendListCount(int uid){
-        int total = friendDao.getFriendListCount(uid);
-        return total;
+        return friendDao.getFriendListCount(uid);
     }
 }
