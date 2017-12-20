@@ -35,11 +35,10 @@ public class FriendController {
 
     public static void addFriend(HttpServletRequest request, HttpServletResponse response) {
 
-        int friendid = Integer.parseInt(request.getParameter("uid"));
-        String username = request.getParameter("username");
-        int uid = userService.getUidByUsername(username);
+        int fid = Integer.parseInt(request.getParameter("fid"));
+        int uid = (int) request.getSession().getAttribute("uid");
         friend.setUid(uid);
-        friend.setFriendid(friendid);
+        friend.setFriendid(fid);
         boolean flag = friendService.addFriend(friend);
         ResponseUtil.sendBooleanResponse(response,flag);
     }
