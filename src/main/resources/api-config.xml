@@ -10,7 +10,7 @@
         <method>register</method>
     </api>
     <api path = "Login">
-        <class>LoginController</class>
+        <class>cn.edu.hit.weibo.controller.LoginController</class>
         <method>login</method>
     </api>
     <api path = "AddFriend">

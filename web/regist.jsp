@@ -15,7 +15,7 @@
 
             $.ajax({
                 type:"POST",
-                url:"/Regist.do",
+                url:"/Register.do",
                 data:{"username":username,"password":password},
                 dataType:"json",
                 success:function (data){

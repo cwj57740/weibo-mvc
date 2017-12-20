@@ -3,154 +3,424 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>主页</title>
 	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
 	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 
-	<!-- 获取用户名 -->
-	<% String username = (String)session.getAttribute("username");%>
-	<% int uid = (int)session.getAttribute("uid");%>
-
-	<script type="text/javascript"></script>
 </head>
+
 <body>
+
+<h2>添加微博</h2>
 <form action="">
-	标题：<input type="text" name="title" size="120" /><br/>
-	正文：<br/><textarea name="text" id="text" cols="100" rows="10"></textarea><br/>
-	<input type="button" value="发布"/>
+	标题：<input id="add-weibo-title" type="text" name="title" size="120" /><br/> 正文：
+	<br/><textarea id="add-weibo-content" name="text" id="text" cols="100" rows="10"></textarea><br/>
+	<input id="add-weibo-button" type="button" value="发布" />
 </form>
 
-<p>好友列表</p>
-<input type="hidden" name="friendpagenum" id="friendpagenum"/>
-<input type="hidden" name="weibopagenum" id="weibopagenum"/>
-<table class="table table-bordered table-striped" id="table1">
-	<thead>
-		<tr>
-			<th>用户id</th>
-			<th>用户名</th>
-		</tr>
-	</thead>
-	<tbody>
-       <c:forEach var="" items="">
-		<tr>
-			<td></td>
-			<td></td>
-			<td>
-                <button class="btn btn-info" onclick="">
-                    <i class="icon-white icon-eye-open"></i>
-                    	查看微博
-                </button>
-            </td>
-		</tr>
-		</c:forEach>
-	</tbody>
+<h2>好友列表</h2>
+<p>第 <b id="friend-page-index">1</b> 页</p>
+<p>共 <b id="friend-page-count">2</b> 页</p>
+<table id="friend-table" border="1">
+	<tr>
+		<th>好友 ID</th>
+		<th>用户名</th>
+		<th>操作</th>
+	</tr>
+	<tr>
+		<td>1212</td>
+		<td>onceWarmth</td>
+		<td><button onclick="view_friend_weibo(1212);">查看微博</button></td>
+	</tr>
 </table>
-<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	<div id="pagecut" class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
-		<c:choose>
-			<c:when test="${friendpagenum == 1 }">
-				首页
-				上一页
-			</c:when>
-			<c:otherwise>
-				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
-				<a tabindex="0" href="javascript:void(0);" page="${friendpagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
-			</c:otherwise>
-		</c:choose>
+<button onclick="friend_page_jump(0);">上一页</button>
+<button onclick="friend_page_jump(1);">下一页</button>
 
-		<a tabindex="0" href="#" class="fg-button ui-button ui-state-default">${friendpagenum}</a>
-		<!-- <a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">2
-		</a>
-		<a tabindex="0" href="#" class="fg-button ui-button ui-state-default">3</a> -->
-		<c:choose>
-			<c:when test="${friendpagenum==maxpage}">
-				下一页
-				尾页
-			</c:when>
-			<c:otherwise>
-				<a tabindex="0" href="javascript:void(0);" page="${friendpagenum+1 }" class="previous fg-button ui-button ui-state-default">下一页</a>
-				<a tabindex="0" href="javascript:void(0);" page="${friendmaxpage }" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default">尾页</a>
-			</c:otherwise>
-		</c:choose>
-		共计 ${friendtotal } 条数据
-	</div>
-</div>
-
-<input type="button" value="查看所有微博">
-<input type="button" value="查看我的微博">
-
-<!-- 微博内容列表 -->
-<table class="table table-bordered table-striped" id="table2">
-	<thead>
-		<tr>
-			<th>编号</th>
-			<th>用户名</th>
-			<th>标题</th>
-			<th>正文</th>
-			<th>点击量</th>
-		</tr>
-	</thead>
-	<tbody>
-       <c:forEach var="" items="">
-		<tr>
-			<td id="bid"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			
-			<td>
-                <button class="btn btn-info" onclick="">
-                    <i class="icon-white icon-eye-open"></i>
-                    	查看
-                </button>
-                <button class="btn btn-warning" onclick="">
-                    <i class="icon-white icon-refresh"></i>
-                    	回复
-                </button>
-                <button class="btn btn-success" onclick="">
-                    <i class="icon-white icon-share"></i>
-                    	删除
-                </button> 
-                <button class="btn btn-success" onclick="">
-                    <i class="icon-white icon-share"></i>
-                    	将该用户加为好友
-                </button> 
-            </td>
-		</tr>	
-		</c:forEach> 
-	</tbody>
+<h2>别人的微博列表</h2>
+<p>第 <b id="other-weibo-page-index">1</b> 页</p>
+<p>共 <b id="other-weibo-page-count">2</b> 页</p>
+<table id="other-weibo-table" border="1">
+	<tr>
+		<th>编号</th>
+		<th>用户 ID</th>
+		<th>用户名</th>
+		<th>标题</th>
+		<th>点击量</th>
+		<th>添加好友</th>
+		<th>查看微博</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>1212</td>
+		<td>onceWarmth</td>
+		<td>weibo1</td>
+		<td>121</td>
+		<td><button onclick="add_friend('sdsd');">添加好友</button></td>
+		<td><button onclick="view_weibo('qwqw')">查看微博</button></td>
+	</tr>
 </table>
-<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	<div id="pagecut" class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
-		<c:choose>
-			<c:when test="${weibopagenum == 1 }">
-				首页
-				上一页
-			</c:when>
-			<c:otherwise>
-				<a tabindex="0" href="javascript:"+method+"(1)" page="1" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default">首页</a>
-				<a tabindex="0" href="javascript:void(0);" page="${weibopagenum-1}" class="previous fg-button ui-button ui-state-default">上一页</a>
-			</c:otherwise>
-		</c:choose>
 
-		<a tabindex="0" href="#" class="fg-button ui-button ui-state-default">${weibopagenum}</a>
-		<!-- <a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">2
-		</a>
-		<a tabindex="0" href="#" class="fg-button ui-button ui-state-default">3</a> -->
-		<c:choose>
-			<c:when test="${weibopagenum==maxpage}">
-				下一页
-				尾页
-			</c:when>
-			<c:otherwise>
-				<a tabindex="0" href="javascript:void(0);" page="${weibopagenum+1 }" class="previous fg-button ui-button ui-state-default">下一页</a>
-				<a tabindex="0" href="javascript:void(0);" page="${weibomaxpage }" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default">尾页</a>
-			</c:otherwise>
-		</c:choose>
-		共计 ${weibototal } 条数据
-	</div>
-</div>
+<button onclick="other_weibo_page_jump(0);">上一页</button>
+<button onclick="other_weibo_page_jump(1);">下一页</button>
+
+
+<h2>自己的微博列表</h2>
+<p>第 <b id="self-weibo-page-index">1</b> 页</p>
+<p>共 <b id="self-weibo-page-count">2</b> 页</p>
+<table id="self-weibo-table" border="1">
+	<tr>
+		<th>编号</th>
+		<th>标题</th>
+		<th>点击量</th>
+		<th>查看微博</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>weibo1</td>
+		<td>121</td>
+		<td><button onclick="view_weibo(wqwww)">查看微博</button></td>
+	</tr>
+</table>
+
+<button onclick="self_weibo_page_jump(0);">上一页</button>
+<button onclick="self_weibo_page_jump(1)">下一页</button>
+
+<h2>微博查看</h2>
+<h3 id="current-weibo-no" hidden>weibo no</h3>
+<h3>标题：</h3>
+<p id="weibo-title">biaoti</p>
+<h3>内容：</h3>
+<p id="weibo-content">neirong</p>
+<h3>评论列表：</h3>
+<p>第 <b id="comment-page-index">1</b> 页</p>
+<p>共 <b id="comment-page-count">2</b> 页</p>
+<table id="comment-table" border="1">
+	<tr>
+		<th>用户 ID</th>
+		<th>内容</th>
+	</tr>
+	<tr>
+		<td>12121</td>
+		<td>Great!</td>
+	</tr>
+</table>
+<button onclick="comment_page_jump(0);">上一页</button>
+<button onclick="comment_page_jump(1);">下一页</button>
+
+<script type="text/javascript">
+    $("#add-weibo-button").click(function() {
+        console.log("sdsdd");
+        var title = $("#add-weibo-title").val();
+        var content = $("#add-weibo-content").val();
+
+        console.log("title : " + title);
+        console.log("content : " + content);
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: {
+                "title": title,
+                "content": content
+            },
+            success: function(data) {
+                console.log("success");
+                alert("添加成功");
+            },
+            error: function(error) {
+                console.log(error);
+                alert("添加失败");
+            }
+        });
+    });
+
+    function get_friend_list(index) {
+        $.ajax({
+            type: "GET",
+            url: "",
+            data: {
+                "index": index
+            },
+            success: function(data) {
+                console.log(data);
+                var friend_list;
+                clear_firent_table();
+                for (var friend in friend_list) {
+                    var userid = frined["userid"];
+                    var username = frined["username"];
+
+                    insert_friend_table(userid, username);
+                }
+            },
+            error: function(error) {
+                console.log(error);
+                alert("服务器宕机了~~");
+            }
+        });
+    }
+
+    function clear_firent_table() {
+        $("#friend-table tr:not(:first)").empty();
+    }
+
+    function insert_friend_table(userid, username) {
+        var trhtml = "<tr><td>{1}</td><td>{2}</td></tr>";
+        trhtml = trhtml.replace("{1}", userid).replace("{2}", username);
+        $("#friend-table").append(trhtml);
+    }
+
+    function friend_page_jump(ope) {
+        // 0 上一页 1 下一页
+        console.log(ope);
+        var current_index = $("#friend-page-index").html();
+        var friend_page_count = $("#friend-page-count").html();
+        console.log("friend page count " + friend_page_count);
+        console.log("frined page index " + current_index);
+
+        var index;
+        if (ope == 0) {
+            index = current_index - 1;
+            if (current_index < 1) {
+                return;
+            }
+        } else if (ope == 1) {
+            index = current_index + 1;
+            if (index > friend_page_count) {
+                return;
+            }
+        } else if (ope == 2) {
+            index = 1;
+        } else {
+            return;
+        }
+        get_friend_list(index);
+    }
+
+    function get_other_list(index) {
+        $.ajax({
+            type: "GET",
+            url: "",
+            data: {
+                "index": index
+            },
+            success: function(data) {
+                console.log(data);
+                var other_weibo_list;
+                for (var weibo in other_weibo_list) {
+                    var weibono = weibo["weibono"];
+
+                }
+            },
+            error: function(data) {
+                console.log(error);
+            }
+        });
+    }
+
+    function clear_other_weibo_table() {
+        $("#other-weibo-table tr:not(:first)").empty();
+    }
+
+    function insert_other_weibo_table(weibo_no, userid, username, title, hits) {
+        var trhtml = "<tr> \
+                            <td>{1}</td> \
+                            <td>{2}</td> \
+                            <td>{3}</td> \
+                            <td>{4}</td> \
+                            <td>{5}</td> \
+                            <td><button onclick=\"add_friend('{6}');\">添加好友</button></td> \
+                            <td><button onclick=\"view_weibo('{7}')\">查看微博</button></td> \
+                        </tr>";
+        trhtml = trhtml.replace("{1}", weibo_no);
+        trhtml = trhtml.replace("{2}", userid);
+        trhtml = trhtml.replace("{3}", username);
+        trhtml = trhtml.replace("{4}", title);
+        trhtml = trhtml.replace("{5}", hits);
+        trhtml = trhtml.replace("{6}", userid);
+        trhtml = trhtml.replace("{7}", weibo_no);
+        $("#other-weibo-table").append(trhtml);
+    }
+
+    function other_weibo_page_jump(ope) {
+        var current_index = $("#other-weibo-page-index").html();
+        var page_count = $("#other-weibo-page-count").html();
+
+        var index;
+        if (ope == 0) {
+            index = current_index - 1;
+            if (current_index < 1) {
+                return;
+            }
+        } else if (ope == 1) {
+            index = current_index + 1;
+            if (index > current_index) {
+                return;
+            }
+        } else if (ope == 2) {
+            index = 1;
+        } else {
+            return;
+        }
+        get_other_list(index);
+    }
+
+    function add_friend(userid) {
+        console.log(userid);
+        $.ajax({
+            type: "POST",
+            url: "url",
+            data: {
+                "userid": userid
+            },
+            success: function(data) {
+                console.log(data);
+                location.reload()
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
+    function view_weibo(weibo_no) {
+        console.log(weibo_no);
+        $.ajax({
+            type: "POST",
+            url: "url",
+            data: {
+                "bid": weibo_no
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
+    function get_self_weibo_list(index) {
+        $ajax({
+            type: "GET",
+            url: "",
+            data: {
+                "data": index
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function clear_self_weibo_list() {
+        $("#self-weibo-table tr:not(:first)").empty();
+    }
+
+    function insert_self_weibo_table(weibo_no, title, hits) {
+        var trhtml = "<tr> \
+    <td>{1}</td> \
+    <td>{2}</td> \
+    <td>{3}</td> \
+    <td><button onclick=\"view_weibo('{4}')\">查看微博</button></td> \
+</tr>";
+        trhtml = trhtml.replace("{1}", weibo_no).replace("{2}", title).replace("{3}", hits);
+        trhtml = trhtml.replace("{4}", weibo_no);
+        $("#self-weibo-table").append(trhtml);
+    }
+
+    function self_weibo_page_jump(ope) {
+        var current_page = $("#self-weibo-page-index");
+        var page_count = $("#self-weibo-page-count");
+
+        var index;
+        if (ope == o) {
+            index = current_page - 1;
+            if (index < 1) {
+                return;
+            }
+        } else if (ope == 1) {
+            index = current_page + 1;
+            if (index > page_count) {
+                return;
+            }
+        } else if (ope == 2) {
+            index = 1;
+        } else {
+            return;
+        }
+        get_self_weibo_list(index);
+    }
+
+    function get_comment_list(weibo_no, page) {
+        $.ajax({
+            type: "GET",
+            url: "",
+            data: {
+                "bid": weibo_no,
+                "page": page
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function clear_comment_table() {
+        $("#comment-table tr:not(:first)").empty();
+    }
+
+    function insert_comment_table(userid, content) {
+        var trhtml = "<tr> \
+            <td>{1}</td> \
+            <td>{2}</td> \
+        </tr>";
+        trhtml = trhtml.replace("{1}", userid).replace("{2}", content);
+        $("#comment-table").append(trhtml);
+    }
+
+    function comment_page_jump(ope) {
+        var current_page = $("#comment-page-index").html();
+        var page_count = $("#comment-page-count").html();
+
+        var index;
+        if (ope == 0) {
+            index = current_page - 1;
+            if (index < 1) {
+                return;
+            }
+        } else if (ope == 1) {
+            index = current_page + 1;
+            if (index > page_count) {
+                return;
+            }
+        } else if (ope == 2) {
+            index = 1;
+        } else {
+            return;
+        }
+        var weibo_no = $("#current-weibo-no").html();
+        get_comment_list(weibo_no, index);
+    }
+
+    $(document).ready(function() {
+        // friend_page_jump(2);
+        // clear_other_weibo_table();
+        // insert_other_weibo_table("1212", "22", "linx", "sd", 55);
+        // clear_self_weibo_list()
+        // insert_self_weibo_table("sd", "title", "sd2222");
+        // clear_comment_table();
+        // insert_comment_table("sdsdsd", "121212121");
+    });
+</script>
 </body>
+
 </html>

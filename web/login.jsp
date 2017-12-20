@@ -21,7 +21,7 @@
                 dataType:"json",
                 success:function (data){
                     if(data){
-                        window.location.href='/regist.jsp';
+                        window.location.href='/main.jsp';
                     }else{
                         alert("用户名或密码有误！");
                     }
