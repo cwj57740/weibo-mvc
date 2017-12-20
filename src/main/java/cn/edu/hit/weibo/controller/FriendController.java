@@ -1,5 +1,6 @@
 package cn.edu.hit.weibo.controller;
 
+import cn.edu.hit.weibo.model.Friend;
 import cn.edu.hit.weibo.service.FriendService;
 import cn.edu.hit.weibo.service.UserService;
 import cn.edu.hit.weibo.util.ResponseUtil;
@@ -11,9 +12,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class FriendController {
-    UserService userService = new UserService();
-    FriendService friendService = new FriendService();
-    public void showFriendList(HttpServletRequest request, HttpServletResponse response){
+    private static UserService userService = new UserService();
+    private static FriendService friendService = new FriendService();
+    private static Friend friend = new Friend();
+
+    public static void showFriendList(HttpServletRequest request, HttpServletResponse response){
         String username = request.getParameter("username");
         int friendpagenum = Integer.parseInt(request.getParameter("friendpagenum"));
 
@@ -25,6 +28,26 @@ public class FriendController {
 
         try {
             ResponseUtil.sendJsonResponse(response,friendmap,total,maxpage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addFriend(HttpServletRequest request, HttpServletResponse response) {
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            int friendid = Integer.parseInt(request.getParameter("uid"));
+            String username = request.getParameter("username");
+            int uid = userService.getUidByUsername(username);
+            friend.setUid(uid);
+            friend.setFriendid(friendid);
+            boolean flag = friendService.addFriend(friend);
+            if (flag) {
+                out.write("true");
+            } else {
+                out.write("false");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
