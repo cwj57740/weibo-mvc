@@ -24,17 +24,12 @@
 
 <h2>好友列表</h2>
 <p>第 <b id="friend-page-index">1</b> 页</p>
-<p>共 <b id="friend-page-count">2</b> 页</p>
+<p>共 <b id="friend-page-count">1</b> 页</p>
 <table id="friend-table" border="1">
 	<tr>
 		<th>好友 ID</th>
 		<th>用户名</th>
 		<th>操作</th>
-	</tr>
-	<tr>
-		<td>1212</td>
-		<td>onceWarmth</td>
-		<td><button onclick="view_friend_weibo(1212);">查看微博</button></td>
 	</tr>
 </table>
 <button onclick="friend_page_jump(0);">上一页</button>
@@ -42,7 +37,7 @@
 
 <h2>别人的微博列表</h2>
 <p>第 <b id="other-weibo-page-index">1</b> 页</p>
-<p>共 <b id="other-weibo-page-count">2</b> 页</p>
+<p>共 <b id="other-weibo-page-count">1</b> 页</p>
 <table id="other-weibo-table" border="1">
 	<tr>
 		<th>编号</th>
@@ -53,15 +48,6 @@
 		<th>添加好友</th>
 		<th>查看微博</th>
 	</tr>
-	<tr>
-		<td>1</td>
-		<td>1212</td>
-		<td>onceWarmth</td>
-		<td>weibo1</td>
-		<td>121</td>
-		<td><button onclick="add_friend('sdsd');">添加好友</button></td>
-		<td><button onclick="view_weibo('qwqw')">查看微博</button></td>
-	</tr>
 </table>
 
 <button onclick="other_weibo_page_jump(0);">上一页</button>
@@ -70,19 +56,13 @@
 
 <h2>自己的微博列表</h2>
 <p>第 <b id="self-weibo-page-index">1</b> 页</p>
-<p>共 <b id="self-weibo-page-count">2</b> 页</p>
+<p>共 <b id="self-weibo-page-count">1</b> 页</p>
 <table id="self-weibo-table" border="1">
 	<tr>
 		<th>编号</th>
 		<th>标题</th>
 		<th>点击量</th>
 		<th>查看微博</th>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td>weibo1</td>
-		<td>121</td>
-		<td><button onclick="view_weibo(wqwww)">查看微博</button></td>
 	</tr>
 </table>
 
@@ -92,20 +72,16 @@
 <h2>微博查看</h2>
 <h3 id="current-weibo-no" hidden>weibo no</h3>
 <h3>标题：</h3>
-<p id="weibo-title">biaoti</p>
+<p id="weibo-title"></p>
 <h3>内容：</h3>
-<p id="weibo-content">neirong</p>
+<p id="weibo-content"></p>
 <h3>评论列表：</h3>
 <p>第 <b id="comment-page-index">1</b> 页</p>
-<p>共 <b id="comment-page-count">2</b> 页</p>
+<p>共 <b id="comment-page-count">1</b> 页</p>
 <table id="comment-table" border="1">
 	<tr>
 		<th>用户 ID</th>
 		<th>内容</th>
-	</tr>
-	<tr>
-		<td>12121</td>
-		<td>Great!</td>
 	</tr>
 </table>
 <button onclick="comment_page_jump(0);">上一页</button>
@@ -120,14 +96,15 @@
         console.log("title : " + title);
         console.log("content : " + content);
         $.ajax({
-            type: "POST",
-            url: "",
+            type: "GET",
+            url: "/AddWeibo.do",
             data: {
                 "title": title,
-                "content": content
+                "text": content
             },
             success: function(data) {
                 console.log("success");
+                console.log(data);
                 alert("添加成功");
             },
             error: function(error) {
@@ -140,7 +117,7 @@
     function get_friend_list(index) {
         $.ajax({
             type: "GET",
-            url: "",
+            url: "/GetFriendList.do",
             data: {
                 "index": index
             },
@@ -202,7 +179,7 @@
     function get_other_list(index) {
         $.ajax({
             type: "GET",
-            url: "",
+            url: "/GetWeiboList.do",
             data: {
                 "index": index
             },
@@ -271,7 +248,7 @@
         console.log(userid);
         $.ajax({
             type: "POST",
-            url: "url",
+            url: "/AddFriend.do",
             data: {
                 "userid": userid
             },
@@ -289,7 +266,7 @@
         console.log(weibo_no);
         $.ajax({
             type: "POST",
-            url: "url",
+            url: "/GetWeibo.do",
             data: {
                 "bid": weibo_no
             },
@@ -305,7 +282,7 @@
     function get_self_weibo_list(index) {
         $ajax({
             type: "GET",
-            url: "",
+            url: "/GetOwnWeiboList.do",
             data: {
                 "data": index
             },
@@ -360,7 +337,7 @@
     function get_comment_list(weibo_no, page) {
         $.ajax({
             type: "GET",
-            url: "",
+            url: "/GetCommentList.do",
             data: {
                 "bid": weibo_no,
                 "page": page
