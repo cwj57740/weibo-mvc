@@ -31,4 +31,8 @@ public class UserService {
         int uid = user.getUid();
         return uid;
     }
+
+    public User getUserByUid(int uid){
+        return userDao.getUserById(uid);
+    }
 }

@@ -117,9 +117,27 @@ public class WeiboService extends Observable {
         return blogDao.getBlogListByUser(user,start,length);
     }
 
-    public void addComment(Comment comment){
-        int id = commentDao.addComment(comment);
-        comment.setId(id);
+    public int getUserBlogListCount(User user){
+        return blogDao.getBlogCountByUser(user);
     }
 
+    public boolean addComment(Comment comment){
+        try {
+            int id = commentDao.addComment(comment);
+            comment.setId(id);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public List<Comment> getCommentListByBid(int bid, int start, int length){
+        return commentDao.getCommentListByBid(bid, start, length);
+    }
+
+    public int getCommentListCountByBid(int bid){
+        return commentDao.getCommentListCountByBid(bid);
+    }
 }

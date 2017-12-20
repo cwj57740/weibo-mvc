@@ -12,8 +12,13 @@ public class CommentDao {
         return dao.addT(sql,comment.getBid(),comment.getUid(),comment.getContent());
     }
 
-    public List<Comment> getCommentListByBid(int bid,int index,int num){
+    public List<Comment> getCommentListByBid(int bid,int index,int num) {
         String sql = "select * from comment where bid = ? limit ?, ?";
-        return dao.getTListByParams(sql,bid,index,num);
+        return dao.getTListByParams(sql, bid, index, num);
+    }
+
+    public int getCommentListCountByBid(int bid){
+        String sql = "select count(*) from comment where bid = ?";
+        return Integer.parseInt(dao.getColumnByParams(sql,"count(*)",bid).toString());
     }
 }

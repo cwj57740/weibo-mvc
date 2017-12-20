@@ -2,15 +2,12 @@ package cn.edu.hit.weibo.controller;
 
 import cn.edu.hit.weibo.service.FriendService;
 import cn.edu.hit.weibo.service.UserService;
-import cn.edu.hit.weibo.util.ModelUtil;
+import cn.edu.hit.weibo.util.ResponseUtil;
 import cn.edu.hit.weibo.util.PageUtil;
-import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FriendController {
@@ -27,7 +24,7 @@ public class FriendController {
         Map<String,String> friendmap = friendService.getFriendList(uid,friendpagenum,length);
 
         try {
-            ModelUtil.sendJsonResponse(response,friendmap,total,maxpage);
+            ResponseUtil.sendJsonResponse(response,friendmap,total,maxpage);
         } catch (IOException e) {
             e.printStackTrace();
         }

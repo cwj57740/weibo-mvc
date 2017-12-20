@@ -54,4 +54,9 @@ public class BlogDao {
         return Integer.parseInt(dao.getColumnByParams(sql,"count(*)").toString());
     }
 
+    public int getBlogCountByUser(User user){
+        String sql = "select count(*) from blog where uid = ?";
+        return Integer.parseInt(dao.getColumnByParams(sql,"count(*)",user.getUid()).toString());
+    }
+
 }
